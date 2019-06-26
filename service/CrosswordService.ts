@@ -1,6 +1,7 @@
 import WordSplitterUtil from "utils/WordSplitterUtil";
 import Grid from "classes/Grid";
 import WordSearch from "classes/WordSearch";
+import Direction from "classes/Direction";
 
 function generate(words: Array<string>): any {
     words = words.map(word => "_" + word + "_");
@@ -17,18 +18,19 @@ function generate(words: Array<string>): any {
     
     while (queue.length !== 0 && remainingWords.size() > 0) {
         let letter = queue.shift();
-        if (letter && letter.value() !== "_") {
-            const xCor = letter.getX();
-            const yCor = letter.getY();
-            let searchTerm = undefined;
-            if (!letter.getDirections().includes("vertical")) {
+        if (letter && letter.getValue() !== "_") {
+            const xCor = letter.getXCor();
+            const yCor = letter.getYCor();
+            let searchTerm;
+            let newDirection;
+            if (!letter.getDirections().includes(Direction.Vertical)) {
                 searchTerm = grid.getVerticalSearchTerm(xCor, yCor);
-                let newDirection = "vertical";
+                newDirection = Direction.Vertical;
             }
 
-            if (!letter.getDirections().includes("horizontal")) {
+            if (!letter.getDirections().includes(Direction.Horizontal)) {
                 searchTerm = grid.getHorizontalSearchTerm(xCor, yCor);
-                let newDirection = "horizontal";
+                newDirection = Direction.Horizontal;
             }
             
             if (searchTerm) {
