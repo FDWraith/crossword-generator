@@ -4,11 +4,18 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest"
   },
   "author": "Kevin Zhang",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.17.1"
+    "@types/node": "^12.6.8",
+    "express": "^4.17.1",
+    "jest": "^24.8.0"
+  },
+  "devDependencies": {
+    "@types/jest": "^24.0.15",
+    "jest": "^24.8.0",
+    "ts-jest": "^24.0.2"
   }
 }
