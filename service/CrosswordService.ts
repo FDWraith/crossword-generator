@@ -1,7 +1,7 @@
-import WordSplitterUtil from "utils/WordSplitterUtil";
-import Grid from "classes/Grid";
-import WordSearch from "classes/WordSearch";
-import Direction from "classes/Direction";
+import WordSplitterUtil from "./utils/WordSplitterUtil";
+import Grid from "./classes/Grid";
+import WordSearch from "./classes/WordSearch";
+import Direction from "./classes/Direction";
 
 function generate(words: Array<string>): any {
     words = words.map(word => "_" + word + "_");

@@ -1,12 +1,13 @@
-import { Letter, Direction } from "classes/Letter";
+import Letter from "./Letter";
+import Direction from "./Direction";
 
 export default class Grid {
     grid: object;
     
     constructor() {
         this.grid = {};
-        let intialLetter = new Letter(0, 0);
-        initialLetter.addDirection("horizontal");
+        let initialLetter = new Letter(0, 0);
+        initialLetter.addDirection(Direction.Horizontal);
         this.insertAt(0, 0, initialLetter);
     }
     
@@ -46,7 +47,7 @@ export default class Grid {
             this.setLetter(xCor - pre, yCor, value, direction);
         }
 
-        for (let post = 1; pre < postfix.length; post += 1) {
+        for (let post = 1; post < postfix.length; post += 1) {
             let value = prefixLetters.shift();
             this.setLetter(xCor + post, yCor, value, direction);
         }        
@@ -62,7 +63,7 @@ export default class Grid {
             this.setLetter(xCor, yCor - pre, value, direction);
         }
 
-        for (let post = 1; pre < postfix.length; post += 1) {
+        for (let post = 1; post < postfix.length; post += 1) {
             let value = prefixLetters.shift();
             this.setLetter(xCor, yCor + post, value, direction);
         }
@@ -70,10 +71,51 @@ export default class Grid {
 
     getVerticalSearchTerm(xCor: number, yCor: number): string {
         // Implementation
+        if (!this.letterAt(xCor, yCor)) {
+            return "";
+        }
+
+        let prefix = "";
+        let suffix = "";
+
+        let currYCor = yCor;
+        while (this.letterAt(xCor, currYCor)) {
+            prefix = this.letterAt(xCor, currYCor) + prefix;
+        }
+
+        currYCor = yCor + 1;
+        while (this.letterAt(xCor, currYCor)) {
+            suffix += this.letterAt(xCor, currYCor);
+        }
+
+        return prefix + suffix;
     }
 
     getHorizontalSearchTerm(xCor: number, yCor: number): string {
         // Implementation
+        if (!this.letterAt(xCor, yCor)) {
+            return "";
+        }
+
+        let prefix = "";
+        let suffix = "";
+
+        let currXCor = xCor;
+        while (this.letterAt(currXCor, yCor)) {
+            prefix = this.letterAt(currXCor, yCor) + prefix;
+        }
+
+        currXCor = xCor + 1;
+        while (this.letterAt(currXCor, yCor)) {
+            suffix += this.letterAt(currXCor, yCor);
+        }
+
+        return prefix + suffix;
     }
     
+    flatten(): any {
+        // Implementation details TBD
+        return this.grid;
+    }
+
 }

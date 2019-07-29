@@ -1,4 +1,7 @@
-export default enum Direction {
+enum Direction {
     Vertical = "vertical",
     Horizontal = "horizontal"
 }
+
+export default Direction;
+

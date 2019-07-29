@@ -1,8 +1,8 @@
-import Direction from "classes/Direction";
+import Direction from "./Direction";
 
 
-class Letter {
-    directions: array<Direction>;
+export default class Letter {
+    directions: Array<Direction>;
     readonly xCor: number;
     readonly yCor: number;
     value: string;
@@ -26,7 +26,7 @@ class Letter {
         return this.yCor;
     }
 
-    getDirections(): array<Direction> {
+    getDirections(): Array<Direction> {
         return this.directions;
     }
 
@@ -38,6 +38,3 @@ class Letter {
         this.directions.push(direction);
     }
 }
-
-
-export default { Letter, Direction }
