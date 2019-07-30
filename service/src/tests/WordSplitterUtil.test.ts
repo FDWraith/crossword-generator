@@ -1,8 +1,7 @@
-const WordSplitterUtil = require("../utils/WordSplitterUtil");
+import WordSplitterUtil from "../utils/WordSplitterUtil"
 
 describe("WordSplitterUtil test", () => {
     describe("When split is called", () => {
-        console.log(WordSplitterUtil);
         const word = "helloworld";
         let results;
         describe("When the searchTerm is at beginning", () => {
@@ -23,7 +22,7 @@ describe("WordSplitterUtil test", () => {
             });
             
             test("should split into tuple with empty string as last index", () => {
-                expect(results).toEqual(["", "world"]);
+                expect(results).toEqual(["hello", ""]);
             });
         });
 

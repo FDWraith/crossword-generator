@@ -20,6 +20,6 @@ export default class WordSearch {
 
     remove(word: string): void {
         let index = this.words.indexOf(word);
-        this.words.splice(index, index + 1);
+        (index !== -1) && this.words.splice(index, index + 1);
     }
 }
