@@ -7,7 +7,7 @@ app.use(express.json());
 
 function generateCrosswords(req, res) {
     const words = req.body;
-    res.send(CrosswordService.generate(words));
+    res.send(CrosswordService.default.generate(words));
 }
 
 app.post("/generate", generateCrosswords);

@@ -35,9 +35,10 @@ function generate(words: Array<string>): any {
             
             if (searchTerm) {
                 let possibilities = remainingWords.search(searchTerm);
-                if (possibilities !== []) {
+                if (possibilities.length > 0) {
                     let word = possibilities[0];
                     remainingWords.remove(word);
+
                     let [prefix, postfix] = WordSplitterUtil.split(word, searchTerm);
 
                     if (newDirection === "vertical") {
