@@ -47,31 +47,38 @@ export default class Grid {
         const direction = Direction.Horizontal;
 
         // Implementation
-        for (let pre = 1; pre < prefix.length; pre += 1) {
+        for (let pre = 1; pre <= prefix.length; pre += 1) {
             let value = prefixLetters.pop();
             this.setLetter(xCor - pre, yCor, value, direction);
         }
 
-        for (let post = 1; post < postfix.length; post += 1) {
+        for (let post = 1; post <= postfix.length; post += 1) {
             let value = postfixLetters.shift();
             this.setLetter(xCor + post, yCor, value, direction);
         }        
+        
+        const center = this.letterAt(xCor, yCor);
+        center.addDirection(direction);
     }
 
     addVertical(prefix: string, postfix: string, xCor: number, yCor: number): void {
         const prefixLetters = prefix.split("");
         const postfixLetters = postfix.split("");
         const direction = Direction.Vertical;
+
         // Implementation
-        for (let pre = 1; pre < prefix.length; pre += 1) {
+        for (let pre = 1; pre <= prefix.length; pre += 1) {
             let value = prefixLetters.pop();
             this.setLetter(xCor, yCor - pre, value, direction);
         }
 
-        for (let post = 1; post < postfix.length; post += 1) {
+        for (let post = 1; post <= postfix.length; post += 1) {
             let value = postfixLetters.shift();
             this.setLetter(xCor, yCor + post, value, direction);
         }
+
+        const center = this.letterAt(xCor, yCor);
+        center.addDirection(direction);
     }
 
     getVerticalSearchTerm(xCor: number, yCor: number): string {
@@ -80,9 +87,10 @@ export default class Grid {
         }
 
         let prefix = "";
-        let suffix = "";
+        let center = this.letterAt(xCor, yCor).getValue();
+        let postfix = "";
 
-        let currYCor = yCor;
+        let currYCor = yCor - 1;
         while (this.letterAt(xCor, currYCor)) {
             prefix = this.letterAt(xCor, currYCor).getValue() + prefix;
             currYCor -= 1;
@@ -90,11 +98,11 @@ export default class Grid {
 
         currYCor = yCor + 1;
         while (this.letterAt(xCor, currYCor)) {
-            suffix += this.letterAt(xCor, currYCor).getValue();
+            postfix += this.letterAt(xCor, currYCor).getValue();
             currYCor += 1;
         }
 
-        return prefix + suffix;
+        return prefix + center + postfix;
     }
 
     getHorizontalSearchTerm(xCor: number, yCor: number): string {
@@ -103,9 +111,11 @@ export default class Grid {
         }
 
         let prefix = "";
-        let suffix = "";
+        let center = this.letterAt(xCor, yCor).getValue();
+        let postfix = "";
 
-        let currXCor = xCor;
+
+        let currXCor = xCor - 1;
         while (this.letterAt(currXCor, yCor)) {
             prefix = this.letterAt(currXCor, yCor).getValue() + prefix;
             currXCor -= 1;
@@ -113,11 +123,11 @@ export default class Grid {
 
         currXCor = xCor + 1;
         while (this.letterAt(currXCor, yCor)) {
-            suffix += this.letterAt(currXCor, yCor).getValue();
+            postfix += this.letterAt(currXCor, yCor).getValue();
             currXCor += 1;
         }
 
-        return prefix + suffix;
+        return prefix + center + postfix;
     }
     
     // TODO Clean this up
